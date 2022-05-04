@@ -26,9 +26,12 @@ public class Game implements Serializable{
 	private String name;
 	private String releaseDate;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "publisher_id")
-	private Publisher publisher;
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "tb_game_publisher",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "publisher_id")
+    )
+	private Set<Publisher> publishers = new HashSet<>();
 	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_game_platform",
@@ -40,12 +43,12 @@ public class Game implements Serializable{
 	public Game() {
 	}
 	
-	public Game(Long id, String name, String releaseDate, Publisher publisher) {
+	public Game(Long id, String name, String releaseDate) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.releaseDate = releaseDate;
-		this.publisher = publisher;
+
 	}
 
 	public Long getId() {
@@ -64,9 +67,6 @@ public class Game implements Serializable{
 		this.name = name;
 	}
 
-	public Publisher getPublisher() {
-		return publisher;
-	}
 
 	public String getReleaseDate() {
 		return releaseDate;
@@ -75,9 +75,10 @@ public class Game implements Serializable{
 	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
+	
 
-	public void setPublisher(Publisher publisher) {
-		this.publisher = publisher;
+	public Set<Publisher> getPublishers() {
+		return publishers;
 	}
 
 	public Set<Platform> getPlatforms() {

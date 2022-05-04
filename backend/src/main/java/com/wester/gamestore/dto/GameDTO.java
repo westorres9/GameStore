@@ -6,36 +6,38 @@ import java.util.Set;
 
 import com.wester.gamestore.entities.Game;
 import com.wester.gamestore.entities.Platform;
+import com.wester.gamestore.entities.Publisher;
 
 public class GameDTO {
 
     private Long id;
     private String name;
     private String releaseDate;
-    private PublisherDTO publisher;
+    
+    
+    private List<PublisherDTO> publishers = new ArrayList<>();
 
     private List<PlatformDTO> platforms = new ArrayList<>();
 
     public GameDTO(){
     }
 
-    public GameDTO(Long id, String name, String releaseDate, PublisherDTO publisher) {
+    public GameDTO(Long id, String name, String releaseDate) {
         this.id = id;
         this.name = name;
         this.releaseDate = releaseDate;
-        this.publisher = publisher;
     }
 
     public GameDTO(Game entity) {
         this.id = entity.getId();
         this.name = entity.getName();
         this.releaseDate = entity.getReleaseDate();
-        this.publisher = new PublisherDTO(entity.getPublisher());
         }
 
-    public GameDTO(Game entity, Set<Platform> platforms) {
+    public GameDTO(Game entity, Set<Platform> platforms, Set<Publisher> publishers) {
         this(entity);
         platforms.forEach(plat -> this.platforms.add(new PlatformDTO(plat)));
+        publishers.forEach(pub -> this.publishers.add(new PublisherDTO(pub)));
     }
 
     public Long getId() {
@@ -62,15 +64,11 @@ public class GameDTO {
         this.releaseDate = releaseDate;
     }
 
-    public PublisherDTO getPublisher() {
-        return publisher;
-    }
+    public List<PublisherDTO> getPublishers() {
+		return publishers;
+	}
 
-    public void setPublisher(PublisherDTO publisher) {
-        this.publisher = publisher;
-    }
-
-    public List<PlatformDTO> getPlatforms() {
+	public List<PlatformDTO> getPlatforms() {
         return platforms;
     }
 }

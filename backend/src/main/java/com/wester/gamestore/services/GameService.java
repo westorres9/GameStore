@@ -14,11 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wester.gamestore.dto.GameDTO;
 import com.wester.gamestore.dto.PlatformDTO;
+import com.wester.gamestore.dto.PublisherDTO;
 import com.wester.gamestore.entities.Game;
 import com.wester.gamestore.entities.Platform;
 import com.wester.gamestore.entities.Publisher;
 import com.wester.gamestore.repositories.GameRepository;
 import com.wester.gamestore.repositories.PlatformRepository;
+import com.wester.gamestore.repositories.PublisherRepository;
 import com.wester.gamestore.services.exceptions.DatabaseException;
 import com.wester.gamestore.services.exceptions.ResourceNotFoundException;
 
@@ -30,19 +32,21 @@ public class GameService {
 
     @Autowired
     private PlatformRepository platformRepository;
+    
+    @Autowired PublisherRepository publisherRepository;
 
     @Transactional(readOnly = true)
     public Page<GameDTO> findAllPaged(Pageable pageable) {
 
         Page<Game> page = repository.findAll(pageable);
-        return page.map(x -> new GameDTO(x, x.getPlatforms()));
+        return page.map(x -> new GameDTO(x, x.getPlatforms(),x.getPublishers()));
     }
 
     @Transactional(readOnly = true)
     public GameDTO findById(Long id) {
         Optional<Game> obj = repository.findById(id);
-        Game entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
-        return new GameDTO(entity, entity.getPlatforms());
+        Game entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+        return new GameDTO(entity, entity.getPlatforms(), entity.getPublishers());
     }
 
     @Transactional
@@ -50,7 +54,7 @@ public class GameService {
         Game entity = new Game();
         copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
-        return new GameDTO(entity);
+        return new GameDTO(entity, entity.getPlatforms(), entity.getPublishers());
     }
 
     @Transactional
@@ -79,7 +83,11 @@ public class GameService {
     	
         entity.setName(dto.getName());
         entity.setReleaseDate(dto.getReleaseDate());
-        entity.setPublisher(new Publisher());
+        entity.getPublishers().clear();
+        for (PublisherDTO pubDto : dto.getPublishers()) {
+        	Publisher publisher = publisherRepository.getOne(pubDto.getId());
+            entity.getPublishers().add(publisher);
+        }
         entity.getPlatforms().clear();
         for (PlatformDTO platDto : dto.getPlatforms()) {
             Platform platform = platformRepository.getOne(platDto.getId());

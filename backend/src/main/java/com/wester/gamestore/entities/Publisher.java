@@ -2,13 +2,16 @@ package com.wester.gamestore.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
@@ -21,8 +24,8 @@ public class Publisher implements Serializable{
 	private Long id;
 	private String name;
 	
-	@OneToMany(mappedBy = "publisher")
-    private List<Game> games = new ArrayList<>();
+	@ManyToMany(mappedBy = "publishers")
+    private Set<Game> games = new HashSet<>();
 	
 	public Publisher() {
 	}
@@ -48,7 +51,8 @@ public class Publisher implements Serializable{
 		this.name = name;
 	}
 
-	public List<Game> getGames() {
+
+	public Set<Game> getGames() {
 		return games;
 	}
 
