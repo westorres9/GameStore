@@ -1,16 +1,40 @@
 package com.wester.gamestore.entities;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Game {
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+@Entity
+@Table(name = "tb_game")
+public class Game implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String releaseDate;
+	
+	@ManyToOne
+    @JoinColumn(name = "publisher_id")
 	private Publisher publisher;
 	
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "tb_game_platform",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "platform_id")
+    )
 	private Set<Platform> platforms = new HashSet<>();
 	
 	public Game() {

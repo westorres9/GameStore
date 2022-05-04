@@ -1,13 +1,30 @@
 package com.wester.gamestore.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Publisher {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+@Entity
+@Table(name = "tb_publisher")
+public class Publisher implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	
-	private Publisher() {
+	@OneToMany(mappedBy = "publisher")
+    private List<Game> games = new ArrayList<>();
+	
+	public Publisher() {
 	}
 
 	public Publisher(Long id, String name) {
@@ -29,6 +46,10 @@ public class Publisher {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Game> getGames() {
+		return games;
 	}
 
 	@Override

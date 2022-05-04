@@ -1,11 +1,28 @@
 package com.wester.gamestore.entities;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-public class Platform {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+@Entity
+@Table(name = "tb_platform")
+public class Platform implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	
+	@ManyToMany(mappedBy = "platforms")
+    private Set<Game> games = new HashSet<>();
 	
 	public Platform() {
 	}
@@ -29,6 +46,10 @@ public class Platform {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<Game> getGames() {
+		return games;
 	}
 
 	@Override
