@@ -31,7 +31,7 @@ public class GameDTO {
         this.name = entity.getName();
         this.releaseDate = entity.getReleaseDate();
         this.publisher = new PublisherDTO(entity.getPublisher());
-    }
+        }
 
     public GameDTO(Game entity, Set<Platform> platforms) {
         this(entity);

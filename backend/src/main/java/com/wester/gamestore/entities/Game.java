@@ -26,7 +26,7 @@ public class Game implements Serializable{
 	private String name;
 	private String releaseDate;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher_id")
 	private Publisher publisher;
 	
