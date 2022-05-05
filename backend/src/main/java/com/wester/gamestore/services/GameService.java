@@ -83,6 +83,8 @@ public class GameService {
     	
         entity.setName(dto.getName());
         entity.setReleaseDate(dto.getReleaseDate());
+        entity.setImgUrl(dto.getImgUrl());
+        entity.setPrice(dto.getPrice());
         entity.getPublishers().clear();
         for (PublisherDTO pubDto : dto.getPublishers()) {
         	Publisher publisher = publisherRepository.getOne(pubDto.getId());

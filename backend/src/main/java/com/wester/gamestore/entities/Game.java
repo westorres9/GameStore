@@ -24,6 +24,8 @@ public class Game implements Serializable{
 	private Long id;
 	private String name;
 	private String releaseDate;
+	private String imgUrl;
+	private Double price;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_game_publisher",
@@ -42,11 +44,13 @@ public class Game implements Serializable{
 	public Game() {
 	}
 	
-	public Game(Long id, String name, String releaseDate) {
+	public Game(Long id, String name, String releaseDate,String imgUrl, Double price) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.releaseDate = releaseDate;
+		this.imgUrl = imgUrl;
+		this.price = price;
 
 	}
 
@@ -75,6 +79,21 @@ public class Game implements Serializable{
 		this.releaseDate = releaseDate;
 	}
 	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
 	public Set<Publisher> getPublishers() {
 		return publishers;
