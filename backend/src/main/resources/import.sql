@@ -8,8 +8,6 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
 
-
-
 INSERT INTO tb_platform (name) VALUES ('PC');
 INSERT INTO tb_platform (name) VALUES ('Xbox');
 INSERT INTO tb_platform (name) VALUES ('Playstation');
@@ -25,17 +23,17 @@ INSERT INTO tb_publisher (name) VALUES ('Konami');
 INSERT INTO tb_publisher (name) VALUES ('Nintendo');
 
 
-INSERT INTO tb_game (name,release_date) VALUES ('God of War','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('Killzone','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('Horizon Zero Dawn','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('Halo','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('Gears of War','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('Ace Combat 7','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('FinalFantasy XV','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('Tom clancy Ghost Recon','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('Resident Evil Village','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('Metal Solid Phantom Pain','2018-04-18');
-INSERT INTO tb_game (name,release_date) VALUES ('Mario Odissey','2018-04-18');
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('God of War','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/godofwar.jpg',199.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('Killzone','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/kilzone.jpg',99.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('Horizon Zero Dawn','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/horizonzerodwan.jpg',299.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('Halo','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/halo.jpg',199.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('Gears of War','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/gears.jpg',99.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('Ace Combat 7','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/acecombat.jpg',179.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('FinalFantasy XV','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/finalfantasy.jpg',299.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('Tom clancy Ghost Recon','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/ghostrecon.jpg',89.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('Resident Evil Village','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/resident.jpg',299.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('Metal Solid Phantom Pain','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/metalgear.jpg',99.0);
+INSERT INTO tb_game (name,release_date, img_Url, price) VALUES ('Mario Odissey','2018-04-18','https://raw.githubusercontent.com/westorres9/GameStore/blob/main/backend/img/mario.jpg',329.0);
 
 INSERT INTO tb_game_platform (game_id, platform_id) VALUES (1,3);
 INSERT INTO tb_game_platform (game_id, platform_id) VALUES (1,1);
